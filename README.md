@@ -1,9 +1,9 @@
 # Image-handler-module-code
 The code containing the image handler.
 
-For an example of it's use please run alonside the example layout xml file provided having placed two images called test 1 and 2 in your drawables folder.
+For an example of it's use please run the ExampleActivity file provided having ImageHandler and activitymain in the correct folders and having placed two images called test 1 and 2 in your drawables folder. You may also need to update your Android manifest to run the ExampleActivity.
 
-Otherwise the Image handler module is designed to be fully modular and therefore can be run in any code provided a valid Image and ImageView frame is provided.
+Otherwise the Image handler is designed to be fully modular and therefore can be called from any activity provided a valid Image and ImageView frame is provided.
 
 In order to use the image handler you need to do the following:
 
@@ -34,7 +34,7 @@ E.g.
 
  Step 4:
   
-    embed_image(imageID, frameID);
+    imageHandler.embed_image(this, imageID, frameID);
 
 To see an example of this please see the ExampleActivity file
   
