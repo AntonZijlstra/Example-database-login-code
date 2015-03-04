@@ -19,13 +19,13 @@ E.g.
 
  Step 1:
  
-  public ImageHandler imageHandler;
-  imageHandler = new ImageHandler();
+    public ImageHandler imageHandler;
+    imageHandler = new ImageHandler();
 
  Step 2:
  
-  String imageToEmbed = "test1";
-  String frameToEmbedImage = "imageView1";
+    String imageToEmbed = "test1";
+    String frameToEmbedImage = "imageView1";
   
  Step 3:
  
