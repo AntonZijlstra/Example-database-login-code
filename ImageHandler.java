@@ -49,107 +49,47 @@ package com.claritas.anton.socbox;
 //Variable for image streaming, please ignore
 //private ImageView imageView;
 
-//import android.graphics.drawable.Drawable;
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 //imports for image streaming
 //import java.io.IOException;
 //import java.io.InputStream;
 //import java.net.URL;
+//import android.graphics.drawable.Drawable;
 
 //In order to use the image handler you need to do the following:
-//Step 1: Define the Strings for the Image file and imageView frame names
-//Step 2: Use getResources to obtain the ID's of the Image and frame
-//Step 3: Call the embed_image module with those arguments
+//Step 1: Define an Image handler method within your activity
+//Step 2: Define the Strings for the Image file and imageView frame names
+//Step 3: Use getResources to obtain the ID's of the Image and frame
+//Step 4: Call the embed_image module with those arguments
 /*E.g.
 *  Step 1:
+*   public ImageHandler imageHandler;
+*   imageHandler = new ImageHandler();
+*
+*  Step 2:
 *   String imageToEmbed = "test1";
 *   String frameToEmbedImage = "imageView1";
-*  
-*  Step 2:
+*
+*  Step 3:
 *   int imageID = getResources().getIdentifier(imageToEmbed, "drawable", "com.claritas.anton.socbox");
     int frameID = getResources().getIdentifier(frameToEmbedImage, "id", "com.claritas.anton.socbox");
-*  
-*  Step 3
+*
+*  Step 4:
 *   embed_image(imageID, frameID);
 * */
+//To see an example of this please see the ExampleActivity file
 
-public class ImageHandler extends ActionBarActivity {
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        
-        //These are the strings for use in the Frame and Image ID's. These are the names of the files and imageView Frames
-        //that the handler will use
-        String imageToEmbed = "test1";
-        String frameToEmbedImage = "imageView1";
-        String scrollingImageToEmbed = "test1";
-        String scrollingFrameToEmbedImage = "imageView3";
-        String scrollingImageToEmbed2 = "test1";
-        String scrollingFrameToEmbedImage2 = "imageView4";
-        String scrollingImageToEmbed3 = "test1";
-        String scrollingFrameToEmbedImage3 = "imageView5";
-
-        super.onCreate(savedInstanceState);
-        //Set the layout to the main activity layout
-        setContentView(R.layout.activity_main);
-
-        //Define the frame and Image IDs based upon the strings for the file and frame names (above) so that these can 
-        // be passed to the image handler and used to embed the given images in the given ImageViews
-        int imageID = getResources().getIdentifier(imageToEmbed, "drawable", "com.claritas.anton.socbox");
-        int frameID = getResources().getIdentifier(frameToEmbedImage, "id", "com.claritas.anton.socbox");
-
-        int scrollingImageID = getResources().getIdentifier(scrollingImageToEmbed, "drawable", "com.claritas.anton.socbox");
-        int scrollingFrameID = getResources().getIdentifier(scrollingFrameToEmbedImage, "id", "com.claritas.anton.socbox");
-
-        int scrollingImageID2 = getResources().getIdentifier(scrollingImageToEmbed2, "drawable", "com.claritas.anton.socbox");
-        int scrollingFrameID2 = getResources().getIdentifier(scrollingFrameToEmbedImage2, "id", "com.claritas.anton.socbox");
-
-        int scrollingImageID3 = getResources().getIdentifier(scrollingImageToEmbed3, "drawable", "com.claritas.anton.socbox");
-        int scrollingFrameID3 = getResources().getIdentifier(scrollingFrameToEmbedImage3, "id", "com.claritas.anton.socbox");
-
-        //Embed a single image in a frame
-        embed_image(imageID, frameID);
-        //Embed multiple images in a (scrolling) frame
-        embed_image(scrollingImageID, scrollingFrameID);
-        embed_image(scrollingImageID2, scrollingFrameID2);
-        embed_image(scrollingImageID3, scrollingFrameID3);
-        }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+public class ImageHandler /*extends ActionBarActivity */{
 
     //This class embeds a given image within a given Image view in the main layout. It is fully modular.
     //The only requirement for use is that the Image and Frame ID must be defined beforehand (see above)
     //and that there must be an Image in storage and an ImageViewer defined in the layout xml file
     /*Inputs: The image and file to be displayed
     * Outputs: Nothing*/
-    public void embed_image(int imageID, int frameID)
+    public void embed_image(Activity activity, int imageID, int frameID)
     {
         //ImageView imageView = new ImageView(this);
 
@@ -158,13 +98,17 @@ public class ImageHandler extends ActionBarActivity {
             URL url = new URL("@string/address");
             InputStream content = (InputStream) url.getContent();
             Drawable image = Drawable.createFromStream(content , "src");
-            imageView.setImageDrawable(image);
+
+            //imageView.setImageDrawable(image);
+
+            ImageView embedded_image = (ImageView) findViewById(frameID);
+            embedded_image.setImageDrawable(image);
         } catch (IOException e) {
             e.printStackTrace();
         }*/
 
         //Find the correct ImageView frame
-        ImageView embedded_image = (ImageView) findViewById(frameID);
+        ImageView embedded_image = (ImageView) activity.findViewById(frameID);
         //Embed the given image within it
         embedded_image.setImageResource(imageID);
     }
