@@ -78,7 +78,7 @@ import android.widget.ImageView;
     int frameID = getResources().getIdentifier(frameToEmbedImage, "id", "com.claritas.anton.socbox");
 *
 *  Step 4:
-*   embed_image(imageID, frameID);
+*   embed_image(this, imageID, frameID);
 * */
 //To see an example of this please see the ExampleActivity file
 
